@@ -20,6 +20,7 @@ namespace ClassroomSE
         public DbSet<Class> Classes { get; set; }
         public DbSet<Assignment> Assignments { get; set; }
         public DbSet<Course> Courses { get; set; }
+        public DbSet<Grade> Grades { get; set; }
 
         // for many to many relations
         protected override void OnModelCreating(ModelBuilder modelBuilder)

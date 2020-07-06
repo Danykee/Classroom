@@ -33,8 +33,8 @@ namespace ClassroomSE
 
             services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddEntityFrameworkStores<ClassroomContext>();
-
-            var connection = @"Server=.\DDN;Database=ClassroomDataBase;Trusted_Connection=True;ConnectRetryCount=0";
+            
+            var connection = @"Server=DDN;Database=masterSE;Trusted_Connection=True;";
             services.AddDbContext<ClassroomContext>
                 (options => options.UseSqlServer(connection));
 

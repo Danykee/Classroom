@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ClassroomSE.Migrations
 {
     [DbContext(typeof(ClassroomContext))]
-    [Migration("20200630090849_FirstMigration")]
+    [Migration("20200706112500_FirstMigration]")]
     partial class FirstMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
