@@ -12,7 +12,7 @@ using ClassroomSE.Abstractions;
 
 namespace ClassroomSE.Controllers
 {
-    
+    [Authorize(Roles = "Admin")]
     public class ClassesController : Controller
     {
         private readonly IAccountRepository _context;

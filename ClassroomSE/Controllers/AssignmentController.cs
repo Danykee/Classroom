@@ -13,6 +13,7 @@ using ClassroomSE.Abstractions;
 namespace ClassroomSE.Controllers
 {
     
+    
     public class AssignmentController : Controller
     {
         private readonly IAssignmentRepository _context;
@@ -22,6 +23,7 @@ namespace ClassroomSE.Controllers
             _context = context;
         }
 
+        
         public async Task<IActionResult> Index()
         {
             var assignments = from assignment in _context.GetAll()
@@ -45,7 +47,7 @@ namespace ClassroomSE.Controllers
 
             return View(assignment);
         }
-
+        [Authorize(Roles = "Teacher")]
         public IActionResult Create()
         {
             return View();
@@ -53,6 +55,7 @@ namespace ClassroomSE.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Teacher")]
         public async Task<IActionResult> Create(Assignment assignment)
         {
             if (ModelState.IsValid)
@@ -64,7 +67,7 @@ namespace ClassroomSE.Controllers
             }
             return View(assignment);
         }
-
+        [Authorize(Roles = "Teacher")]
         public async Task<IActionResult> Edit(Guid id)
         {
             if (id == null)
@@ -83,6 +86,7 @@ namespace ClassroomSE.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Teacher")]
         public async Task<IActionResult> Edit(Assignment assignment)
         {
 
@@ -101,6 +105,7 @@ namespace ClassroomSE.Controllers
             return View(assignment);
         }
 
+        [Authorize(Roles = "Teacher")]
         public async Task<IActionResult> Delete(Guid id)
         {
             if (id == null)
@@ -120,6 +125,7 @@ namespace ClassroomSE.Controllers
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Teacher")]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
             Assignment assignment = _context.GetAssignmentByAssignmentId(id);

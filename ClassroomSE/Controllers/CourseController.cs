@@ -46,6 +46,7 @@ namespace ClassroomSE.Controllers
             return View(course);
         }
 
+        [Authorize(Roles = "Teacher")]
         public IActionResult Create()
         {
             return View();
@@ -53,6 +54,7 @@ namespace ClassroomSE.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Teacher")]
         public async Task<IActionResult> Create(Course course)
         {
             if (ModelState.IsValid)
@@ -65,6 +67,7 @@ namespace ClassroomSE.Controllers
             return View(course);
         }
 
+        [Authorize(Roles = "Teacher")]
         public async Task<IActionResult> Edit(Guid id)
         {
             if (id == null)
@@ -83,6 +86,7 @@ namespace ClassroomSE.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Teacher")]
         public async Task<IActionResult> Edit(Course course)
         {
 
@@ -101,6 +105,7 @@ namespace ClassroomSE.Controllers
             return View(course);
         }
 
+        [Authorize(Roles = "Teacher")]
         public async Task<IActionResult> Delete(Guid id)
         {
             if (id == null)
@@ -120,6 +125,7 @@ namespace ClassroomSE.Controllers
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Teacher")]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
             Course course = _context.GetCourseByCourseId(id);

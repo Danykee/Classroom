@@ -13,6 +13,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using ClassroomSE.Abstractions;
+using ClassroomSE.Repositories;
+using ClassroomSE.Services;
 
 namespace ClassroomSE
 {
@@ -61,6 +64,18 @@ namespace ClassroomSE
                 options.AccessDeniedPath = "/Identity/Account/AccessDenied";
                 options.SlidingExpiration = true;
             });
+
+            services.AddScoped<IAccountRepository, AccountRepository>();
+            services.AddScoped<IAssignmentRepository, AssignmentRepository>();
+            services.AddScoped<IClassRepository, ClassRepository>();
+            services.AddScoped<ICourseRepository, CourseRepository>();
+            services.AddScoped<IGradeRepository, GradeRepository>();
+
+            services.AddScoped<AccountService>();
+            services.AddScoped<AssignmentService>();
+            services.AddScoped<ClassService>();
+            services.AddScoped<CourseService>();
+            services.AddScoped<GradeService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -80,7 +95,7 @@ namespace ClassroomSE
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
@@ -88,6 +103,7 @@ namespace ClassroomSE
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapRazorPages();
             });
         }
     }
